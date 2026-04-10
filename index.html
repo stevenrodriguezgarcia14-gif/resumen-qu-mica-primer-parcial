@@ -1,1 +1,1134 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>resumen-quimica-itcr-curso-real.html</title>
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=boska@500,700&display=swap" rel="stylesheet">
+  <style>
+    :root, [data-theme="light"] {
+      --text-xs: clamp(0.75rem, 0.72rem + 0.18vw, 0.875rem);
+      --text-sm: clamp(0.9rem, 0.84rem + 0.2vw, 1rem);
+      --text-base: clamp(1rem, 0.96rem + 0.24vw, 1.12rem);
+      --text-lg: clamp(1.12rem, 1.02rem + 0.55vw, 1.45rem);
+      --text-xl: clamp(1.45rem, 1.2rem + 1vw, 2.1rem);
+      --text-2xl: clamp(2rem, 1.4rem + 2vw, 3.2rem);
+      --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem;
+      --space-5: 1.25rem; --space-6: 1.5rem; --space-8: 2rem; --space-10: 2.5rem;
+      --space-12: 3rem; --space-16: 4rem;
+      --color-bg: #f7f6f2;
+      --color-surface: #fffdf7;
+      --color-surface-2: #f1ede6;
+      --color-border: #d8d1c6;
+      --color-text: #241f17;
+      --color-muted: #6d675f;
+      --color-primary: #01696f;
+      --color-primary-2: #0d4c51;
+      --color-yellow: #fff1a8;
+      --color-yellow-border: #d1a600;
+      --color-red: #ffd4d4;
+      --color-red-border: #b42318;
+      --color-green: #d9f7d9;
+      --color-green-border: #2f8f46;
+      --shadow-sm: 0 4px 12px rgba(39,29,16,.07);
+      --shadow-md: 0 14px 34px rgba(39,29,16,.10);
+      --radius-sm: 0.5rem; --radius-md: 0.9rem; --radius-lg: 1.2rem; --radius-full: 999px;
+      --font-body: 'Satoshi', system-ui, sans-serif;
+      --font-display: 'Boska', Georgia, serif;
+      --content: 1120px;
+    }
+    [data-theme="dark"] {
+      --color-bg: #171614;
+      --color-surface: #1e1c19;
+      --color-surface-2: #25221d;
+      --color-border: #3b3731;
+      --color-text: #f2ede4;
+      --color-muted: #b2aa9f;
+      --color-primary: #6cb1ba;
+      --color-primary-2: #8ecbd2;
+      --color-yellow: #4d4300;
+      --color-yellow-border: #e7c22e;
+      --color-red: #4b2222;
+      --color-red-border: #ff7b7b;
+      --color-green: #1d3c22;
+      --color-green-border: #75d58b;
+      --shadow-sm: 0 4px 12px rgba(0,0,0,.22);
+      --shadow-md: 0 14px 34px rgba(0,0,0,.28);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 6rem; }
+    body {
+      margin: 0; font-family: var(--font-body); font-size: var(--text-base); line-height: 1.6;
+      background: linear-gradient(180deg, var(--color-bg), var(--color-surface-2)); color: var(--color-text);
+    }
+    a { color: var(--color-primary); }
+    img, svg { max-width: 100%; display: block; }
+    button, input, select, textarea { font: inherit; }
+    .skip-link {
+      position: absolute; left: 1rem; top: -3rem; background: var(--color-primary); color: white;
+      padding: .75rem 1rem; border-radius: var(--radius-sm); z-index: 20;
+    }
+    .skip-link:focus { top: 1rem; }
+    .container { width: min(calc(100% - 2rem), var(--content)); margin: 0 auto; }
+    header {
+      position: sticky; top: 0; z-index: 50; backdrop-filter: blur(12px);
+      background: color-mix(in srgb, var(--color-bg) 86%, transparent);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .header-inner {
+      display: flex; gap: var(--space-4); align-items: center; justify-content: space-between;
+      padding: .9rem 0;
+    }
+    .brand { display: flex; align-items: center; gap: .8rem; min-width: 0; }
+    .logo {
+      width: 2.5rem; height: 2.5rem; border-radius: .8rem; background: var(--color-primary); color: #fff;
+      display: grid; place-items: center; box-shadow: var(--shadow-sm); flex: 0 0 auto;
+    }
+    .brand h1 { font-family: var(--font-display); font-size: var(--text-lg); margin: 0; line-height: 1.05; }
+    .brand p { margin: 0; color: var(--color-muted); font-size: var(--text-sm); }
+    .header-actions { display:flex; gap:.6rem; align-items:center; }
+    .theme-btn, .nav-toggle, .pill-btn {
+      min-height: 44px; min-width: 44px; border: 1px solid var(--color-border); background: var(--color-surface);
+      color: var(--color-text); border-radius: var(--radius-full); padding: .65rem .95rem; cursor: pointer;
+      box-shadow: var(--shadow-sm);
+    }
+    nav.primary-nav {
+      padding: .2rem 0 1rem;
+    }
+    .nav-scroll {
+      display: flex; gap: .65rem; overflow: auto; padding-bottom: .25rem;
+      scrollbar-width: thin;
+    }
+    .nav-scroll a {
+      white-space: nowrap; text-decoration: none; color: var(--color-text); background: var(--color-surface);
+      border: 1px solid var(--color-border); border-radius: var(--radius-full); padding: .55rem .9rem;
+      font-size: var(--text-sm);
+    }
+    .hero {
+      padding: var(--space-10) 0 var(--space-8);
+      display: grid; gap: var(--space-6);
+    }
+    .hero-card {
+      background: linear-gradient(135deg, color-mix(in srgb, var(--color-primary) 8%, var(--color-surface)), var(--color-surface));
+      border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--space-8);
+      box-shadow: var(--shadow-md);
+    }
+    .hero h2 { margin: 0 0 .8rem; font-family: var(--font-display); font-size: var(--text-2xl); line-height: 1.05; }
+    .hero p { margin: .35rem 0; max-width: 78ch; }
+    .grid-3 { display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1rem; }
+    .mini-card {
+      background: var(--color-surface); border:1px solid var(--color-border); border-radius: var(--radius-md);
+      padding: 1rem; box-shadow: var(--shadow-sm);
+    }
+    main { padding-bottom: 4rem; }
+    section.block { margin: 0 0 var(--space-8); }
+    .section-title {
+      display:flex; align-items:center; gap:.8rem; margin: 0 0 1rem;
+      font-size: var(--text-xl); font-family: var(--font-display);
+    }
+    .num {
+      width: 2.2rem; height: 2.2rem; border-radius: 999px; display:grid; place-items:center;
+      background: var(--color-primary); color:#fff; font-size: 1rem; font-family: var(--font-body);
+    }
+    details.topic {
+      background: var(--color-surface); border:1px solid var(--color-border); border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm); overflow:hidden;
+    }
+    details.topic + details.topic { margin-top: 1rem; }
+    details.topic summary {
+      list-style: none; cursor: pointer; padding: 1rem 1.1rem; display:flex; justify-content:space-between; gap:1rem;
+      align-items:center; font-weight:700; background: color-mix(in srgb, var(--color-surface) 75%, var(--color-surface-2));
+      min-height: 56px;
+    }
+    details.topic summary::-webkit-details-marker { display:none; }
+    .summary-left { display:flex; gap:.9rem; align-items:center; }
+    .tag { font-size: .8rem; border-radius: 999px; padding: .2rem .55rem; border:1px solid var(--color-border); color: var(--color-muted); }
+    .topic-body { padding: 1.1rem; display:grid; gap:1rem; }
+    .cards-2 { display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:1rem; }
+    .cards-3 { display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:1rem; }
+    .panel {
+      background: var(--color-surface); border:1px solid var(--color-border); border-radius: var(--radius-md);
+      padding: 1rem;
+    }
+    .panel h3, .panel h4 { margin: 0 0 .55rem; font-size: 1rem; }
+    .panel p:last-child, .panel ul:last-child { margin-bottom: 0; }
+    .idea, .warn, .memo, .exam-box {
+      border-left: 6px solid; border-radius: var(--radius-md); padding: 1rem; background: var(--color-surface-2);
+    }
+    .idea { background: var(--color-yellow); border-color: var(--color-yellow-border); }
+    .warn { background: var(--color-red); border-color: var(--color-red-border); }
+    .memo { background: var(--color-green); border-color: var(--color-green-border); }
+    .exam-box { background: color-mix(in srgb, var(--color-primary) 8%, var(--color-surface)); border-color: var(--color-primary); }
+    ul, ol { padding-left: 1.25rem; margin: .5rem 0; }
+    li + li { margin-top: .35rem; }
+    table { width:100%; border-collapse: collapse; font-size: .97rem; overflow: hidden; }
+    .table-wrap { overflow:auto; border:1px solid var(--color-border); border-radius: var(--radius-md); }
+    th, td { border-bottom:1px solid var(--color-border); padding:.8rem; vertical-align: top; text-align:left; }
+    th { background: color-mix(in srgb, var(--color-surface-2) 70%, var(--color-surface)); }
+    tr:last-child td { border-bottom:none; }
+    code.inline {
+      background: var(--color-surface-2); padding: .12rem .35rem; border-radius: .35rem; border:1px solid var(--color-border);
+    }
+    .formula {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--color-surface-2);
+      padding: .75rem 1rem; border:1px dashed var(--color-border); border-radius: var(--radius-md); overflow:auto;
+    }
+    .flash-list { display:grid; gap:.7rem; }
+    .flash-item {
+      background: var(--color-surface); border:1px solid var(--color-border); border-radius: .9rem; padding: .9rem 1rem;
+    }
+    .quiz-shell {
+      background: var(--color-surface); border:1px solid var(--color-border); border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md); padding: 1.2rem;
+    }
+    .scorebar { display:flex; flex-wrap: wrap; align-items:center; gap:.8rem; margin-bottom: 1rem; }
+    .score-pill { background: var(--color-surface-2); border:1px solid var(--color-border); border-radius: 999px; padding:.45rem .8rem; }
+    .question {
+      padding: 1rem; border:1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); margin-bottom: 1rem;
+    }
+    .question h4 { margin:.1rem 0 .6rem; font-size: 1rem; }
+    .options { display:grid; gap:.55rem; }
+    .option {
+      display:flex; gap:.65rem; align-items:flex-start; padding:.7rem .8rem; border:1px solid var(--color-border); border-radius:.8rem; background:var(--color-surface-2);
+    }
+    .feedback { margin-top:.65rem; font-size:.95rem; }
+    .ok { color: #1c7a34; font-weight: 700; }
+    .bad { color: #a12424; font-weight: 700; }
+    .fill-grid, .match-grid { display:grid; gap:.8rem; }
+    .fill-row, .match-row { display:grid; grid-template-columns: 1fr auto; gap:.8rem; align-items:center; }
+    .match-row { grid-template-columns: 1fr 220px; }
+    input[type="text"], select {
+      width:100%; padding:.72rem .82rem; border:1px solid var(--color-border); background: var(--color-surface);
+      color: var(--color-text); border-radius:.8rem; min-height:44px;
+    }
+    .quiz-actions { display:flex; flex-wrap:wrap; gap:.8rem; margin-top: 1rem; }
+    .primary-btn, .secondary-btn {
+      min-height:44px; border-radius:999px; padding:.75rem 1rem; border:1px solid var(--color-border); cursor:pointer;
+    }
+    .primary-btn { background: var(--color-primary); color:white; border-color: transparent; }
+    .secondary-btn { background: var(--color-surface); color: var(--color-text); }
+    footer {
+      padding: 2rem 0 3rem; color: var(--color-muted); font-size: var(--text-sm);
+    }
+    .back-top { position: fixed; right: 1rem; bottom: 1rem; z-index: 30; }
+    @media (max-width: 900px) {
+      .grid-3, .cards-3 { grid-template-columns: 1fr; }
+      .cards-2 { grid-template-columns: 1fr; }
+      .match-row { grid-template-columns: 1fr; }
+      .hero-card { padding: 1.15rem; }
+    }
+    @media (max-width: 680px) {
+      .header-inner { align-items: flex-start; flex-direction: column; }
+      .brand { align-items:flex-start; }
+      .header-actions { width:100%; justify-content:flex-end; }
+      .fill-row { grid-template-columns: 1fr; }
+      .topic-body, .quiz-shell { padding: .95rem; }
+      .section-title { font-size: 1.45rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { transition: none !important; animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#contenido" class="skip-link">Saltar al contenido</a>
+  <header>
+    <div class="container">
+      <div class="header-inner">
+        <div class="brand">
+          <div class="logo" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Logo química">
+              <path d="M9 3v6.2L4.8 16A3 3 0 0 0 7.4 21h9.2a3 3 0 0 0 2.6-5L15 9.2V3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M8 13h8M7 16h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div>
+            <h1>Química Básica I — Material de estudio</h1>
+            <p>Resumen completo e interactivo basado en el orden real del curso.</p>
+          </div>
+        </div>
+        <div class="header-actions">
+          <button class="theme-btn" data-theme-toggle aria-label="Cambiar tema">◐</button>
+        </div>
+      </div>
+      <nav class="primary-nav" aria-label="Navegación principal">
+        <div class="nav-scroll">
+          <a href="#uso">Cómo usar</a>
+          <a href="#tema1">Fundamentos</a>
+          <a href="#tema2">SI</a>
+          <a href="#tema3">Átomo</a>
+          <a href="#tema4">Cuántico</a>
+          <a href="#tema5">Tabla</a>
+          <a href="#tema6">Grupos</a>
+          <a href="#tema7">Nomenclatura</a>
+          <a href="#repaso">Repaso exacto</a>
+          <a href="#simulacro">Simulacro</a>
+        </div>
+      </nav>
+    </div>
+  </header>
 
+  <main id="contenido" class="container">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-card">
+        <h2 id="hero-title">Resumen estudiable, no genérico</h2>
+        <p>Este material sigue el orden que aparece en tus clases y en los exámenes: <strong>fundamentos de química</strong>, sistema internacional, átomo, modelo mecánico cuántico, tabla periódica, grupos/familias y nomenclatura inorgánica hasta sales.</p>
+        <p>Además, toma señales del estilo del profesor: mucha clasificación, definiciones precisas, comparación de conceptos que se confunden, escritura correcta de unidades, configuración electrónica, propiedades periódicas y nomenclatura Stock.</p>
+      </div>
+      <div class="grid-3">
+        <article class="mini-card">
+          <h3>Qué prioriza este curso</h3>
+          <p>Clasificar bien, justificar con estructura electrónica, convertir unidades con análisis dimensional y distinguir especies, iones y compuestos.</p>
+        </article>
+        <article class="mini-card">
+          <h3>Cómo suele preguntar</h3>
+          <p>Escogencia, completar cuadros, ordenar propiedades, justificar números de oxidación y resolver conversiones usando unidades.</p>
+        </article>
+        <article class="mini-card">
+          <h3>Cómo estudiar aquí</h3>
+          <p>Abre tema por tema, revisa las cajas de color y termina con el simulacro. Luego repasa las respuestas exactas del final.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="uso" class="block">
+      <h2 class="section-title"><span class="num">0</span>Cómo usar este material</h2>
+      <div class="cards-2">
+        <div class="panel">
+          <h3>Lectura recomendada</h3>
+          <ol>
+            <li>Estudia los temas en el orden en que aparecen aquí.</li>
+            <li>En cada tema revisa primero la idea base, luego reglas y finalmente errores comunes.</li>
+            <li>Marca mentalmente las frases en verde: están pensadas para responder corto en examen.</li>
+            <li>Haz el simulacro sin ver apuntes y después corrige con la retroalimentación.</li>
+          </ol>
+        </div>
+        <div class="panel">
+          <h3>Clave de colores</h3>
+          <div class="idea"><strong>Amarillo:</strong> idea clave o relación central.</div>
+          <div class="warn" style="margin-top:.7rem;"><strong>Rojo:</strong> confusión frecuente, trampa o error típico.</div>
+          <div class="memo" style="margin-top:.7rem;"><strong>Verde:</strong> respuesta exacta o frase útil para memorizar.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tema1" class="block">
+      <h2 class="section-title"><span class="num">1</span>Fundamentos de química y materia</h2>
+      <details class="topic" open>
+        <summary><span class="summary-left"><span>Definición de química y clasificación de la materia</span><span class="tag">Base del curso</span></span><span>▾</span></summary>
+        <div class="topic-body">
+          <div class="idea">La química se trabaja en el curso como la ciencia que estudia las propiedades, la composición, la estructura y el comportamiento de la materia.</div>
+          <div class="cards-2">
+            <div class="panel">
+              <h3>Idea base</h3>
+              <p>Materia es todo lo que ocupa un lugar en el espacio y tiene masa. A partir de ahí, el curso la clasifica primero en sustancias puras y mezclas, y luego sigue una ruta de preguntas para decidir si algo es elemento, compuesto, mezcla homogénea o mezcla heterogénea.</p>
+            </div>
+            <div class="panel">
+              <h3>Ruta de clasificación</h3>
+              <ol>
+                <li>¿Es uniforme en todas sus partes?</li>
+                <li>Si no es uniforme: mezcla heterogénea.</li>
+                <li>Si sí es uniforme: pregunta si se separa por métodos físicos.</li>
+                <li>Si se separa físicamente: mezcla homogénea.</li>
+                <li>Si no se separa físicamente: sustancia pura.</li>
+                <li>Luego pregunta si puede descomponerse químicamente: si sí, compuesto; si no, elemento.</li>
+              </ol>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Tipo</th><th>Qué significa</th><th>Cómo reconocerlo</th><th>Ejemplos vistos o coherentes con el curso</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Elemento</td><td>Sustancia pura formada por un solo tipo de átomo.</td><td>No se separa por métodos físicos ni se descompone químicamente en sustancias más simples dentro del enfoque básico del curso.</td><td>Cu, Se, S, As.</td></tr>
+                <tr><td>Compuesto</td><td>Sustancia pura formada por más de un elemento en proporción definida.</td><td>No se separa por métodos físicos, pero sí puede descomponerse químicamente.</td><td>Ag₂SO₄, H₂O, CO₂.</td></tr>
+                <tr><td>Mezcla homogénea</td><td>Mezcla de composición uniforme.</td><td>Parece una sola fase y sí se puede separar físicamente.</td><td>Aire, gasolina, agua potable, petróleo.</td></tr>
+                <tr><td>Mezcla heterogénea</td><td>Mezcla no uniforme.</td><td>Se distinguen fases o regiones distintas.</td><td>Ensalada de frutas, salsa, agua de mar tomada directamente de una ola rompiendo.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="warn">Confusión frecuente: “homogénea” no significa automáticamente “sustancia pura”. También puede ser una mezcla homogénea si se separa por medios físicos.</div>
+          <div class="memo">Frase útil: “Si el material homogéneo puede separarse por medios físicos, es mezcla; si no puede, es sustancia pura”.</div>
+        </div>
+      </details>
+
+      <details class="topic">
+        <summary><span class="summary-left"><span>Propiedades físicas y químicas; intensivas y extensivas</span><span class="tag">Muy preguntable</span></span><span>▾</span></summary>
+        <div class="topic-body">
+          <div class="cards-2">
+            <div class="panel">
+              <h3>Propiedades físicas</h3>
+              <p>Se miden u observan sin cambiar la composición de la sustancia. Ejemplos trabajados en clase: color, densidad, olor, punto de ebullición, solubilidad y dureza.</p>
+            </div>
+            <div class="panel">
+              <h3>Propiedades químicas</h3>
+              <p>Describen cómo una sustancia reacciona o se transforma en otra. Ejemplos del curso: combustión, explosividad, toxicidad y corrosión.</p>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Clasificación</th><th>Depende de la cantidad de materia</th><th>Ejemplos</th><th>Comentario</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Intensiva</td><td>No</td><td>Densidad, temperatura, color, olor, punto de ebullición.</td><td>Se mantiene aunque cambie la cantidad de muestra.</td></tr>
+                <tr><td>Extensiva</td><td>Sí</td><td>Masa, volumen, área superficial.</td><td>Cambia cuando cambia la cantidad de materia.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="exam-box">Patrón de examen: suelen pedir una propiedad extensiva y una intensiva en ese orden o viceversa. Hay que leer el orden exacto del enunciado.</div>
+          <div class="warn">Error típico: creer que temperatura es extensiva porque “sube o baja”. En esta clasificación sigue siendo intensiva.</div>
+          <div class="memo">Respuesta corta útil: “La densidad es intensiva; la masa y el volumen son extensivas”.</div>
+        </div>
+      </details>
+
+      <details class="topic">
+        <summary><span class="summary-left"><span>Cambios físicos y cambios químicos</span><span class="tag">Sale en escogencia</span></span><span>▾</span></summary>
+        <div class="topic-body">
+          <div class="panel">
+            <h3>Idea base</h3>
+            <p>Un cambio físico modifica apariencia, estado o forma, pero no la composición. Un cambio químico sí cambia la composición de la materia y produce sustancias distintas.</p>
+          </div>
+          <div class="cards-2">
+            <div class="panel">
+              <h3>Ejemplos físicos</h3>
+              <ul>
+                <li>Evaporar agua.</li>
+                <li>Congelar una bebida.</li>
+                <li>Cortar papel.</li>
+                <li>Pulverizar una pastilla.</li>
+                <li>Moler café.</li>
+              </ul>
+            </div>
+            <div class="panel">
+              <h3>Ejemplos químicos</h3>
+              <ul>
+                <li>Quemar un fósforo.</li>
+                <li>Digerir un alimento.</li>
+                <li>Corrosión de un clavo.</li>
+                <li>Explosión de TNT.</li>
+                <li>Tostado del café, por las reacciones químicas descritas en el examen.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="warn">Confusión frecuente: en procesos reales pueden ocurrir ambos tipos. En el café, el tostado se analiza como cambio químico y la molienda como cambio físico.</div>
+          <div class="memo">Frase exacta útil: “Cambio físico: no cambia la composición; cambio químico: sí cambia la composición”.</div>
+        </div>
+      </details>
+    </section>
+
+    <section id="tema2" class="block">
+      <h2 class="section-title"><span class="num">2</span>Sistema Internacional de unidades</h2>
+      <details class="topic" open>
+        <summary><span class="summary-left"><span>Magnitud, dimensión y unidades básicas del SI</span><span class="tag">Procedimental</span></span><span>▾</span></summary>
+        <div class="topic-body">
+          <div class="cards-2">
+            <div class="panel">
+              <h3>Definiciones</h3>
+              <ul>
+                <li><strong>Magnitud:</strong> cantidad de lo que se está midiendo.</li>
+                <li><strong>Dimensión:</strong> lo que especifica qué se escogió para medirlo.</li>
+              </ul>
+            </div>
+            <div class="panel">
+              <h3>Unidades básicas del SI</h3>
+              <ul>
+                <li>Masa: kilogramo (kg)</li>
+                <li>Longitud: metro (m)</li>
+                <li>Tiempo: segundo (s)</li>
+                <li>Cantidad de sustancia: mol (mol)</li>
+                <li>Temperatura: kelvin (K)</li>
+                <li>Corriente eléctrica: ampere (A)</li>
+                <li>Intensidad luminosa: candela (cd)</li>
+              </ul>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Unidad derivada</th><th>Símbolo</th><th>Equivalencia útil</th></tr></thead>
+              <tbody>
+                <tr><td>Joule</td><td>J</td><td>kg·m²/s²</td></tr>
+                <tr><td>Newton</td><td>N</td><td>kg·m/s²</td></tr>
+                <tr><td>Pascal</td><td>Pa</td><td>kg/(m·s²)</td></tr>
+                <tr><td>Coulomb</td><td>C</td><td>A·s</td></tr>
+                <tr><td>Grado Celsius</td><td>°C</td><td>Relacionado con K, pero la unidad SI de temperatura es el kelvin.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="warn">Punto tramposo: el curso insiste en distinguir entre unidades básicas y derivadas. Por ejemplo, °C no es la unidad básica de temperatura del SI.</div>
+        </div>
+      </details>
+
+      <details class="topic">
+        <summary><span class="summary-left"><span>Reglas de escritura que sí importan en examen</span><span class="tag">Muy preguntable</span></span><span>▾</span></summary>
+        <div class="topic-body">
+          <div class="cards-2">
+            <div class="panel">
+              <h3>Reglas clave</h3>
+              <ul>
+                <li>Se usa coma decimal.</li>
+                <li>Cada tres cifras puede ir un espacio.</li>
+                <li>Entre el número y la unidad debe ir un espacio: 131 kg.</li>
+                <li>Los símbolos no se pluralizan.</li>
+                <li>Después del símbolo no va punto, salvo final de párrafo.</li>
+                <li>Los nombres de unidades van en minúscula, excepto grados Celsius.</li>
+              </ul>
+            </div>
+            <div class="panel">
+              <h3>Al usar varias unidades</h3>
+              <ul>
+                <li>En productos de símbolos puede usarse espacio, punto bajo o punto medio.</li>
+                <li>En cocientes puede usarse barra, exponente negativo o fracción.</li>
+                <li>Si el denominador es compuesto, conviene usar paréntesis.</li>
+                <li>No deben usarse prefijos en el denominador, excepto kilogramo por ser unidad básica de masa.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="memo">Respuesta exacta útil: “Los símbolos de las unidades jamás se pluralizan”.</div>
+          <div class="warn">Error típico: escribir <span class="inline code">kgs</span>, <span class="inline code">mts</span> o combinar mal productos y cocientes. En examen sí lo castigan.</div>
+        </div>
+      </details>
+
+      <details class="topic">
+        <summary><span class="summary-left"><span>Análisis dimensional y temperatura</span><span class="tag">Problemas</span></span><span>▾</span></summary>
+        <div class="topic-body">
+          <div class="panel">
+            <h3>Procedimiento general</h3>
+            <ol>
+              <li>Determina qué factores de conversión necesitas.</li>
+              <li>Escribe siempre las unidades durante el cálculo.</li>
+              <li>Verifica que se cancelen todas menos la unidad deseada.</li>
+              <li>Si el problema pide unidades básicas del SI, expresa el resultado final en esas unidades.</li>
+            </ol>
+          </div>
+          <div class="formula">Cantidad dada × factor de conversión = cantidad deseada</div>
+          <div class="cards-2">
+            <div class="panel">
+              <h3>Fórmulas de temperatura absoluta</h3>
+              <ul>
+                <li>K = °C + 273,15</li>
+                <li>°F = (9/5 × °C) + 32</li>
+                <li>°C = 5(°F − 32)/9</li>
+              </ul>
+            </div>
+            <div class="panel">
+              <h3>Cuando la temperatura es cambio, no valor absoluto</h3>
+              <ul>
+                <li>ΔK = Δ°C</li>
+                <li>Δ°F = 9/5 Δ°C</li>
+                <li>Δ°C = 5/9 Δ°F</li>
+              </ul>
+            </div>
+          </div>
+          <div class="idea">En prácticas y exámenes se recalca: cuando digan “considere la temperatura como un ΔT”, no puedes sumar ni restar 32 porque no estás convirtiendo una temperatura absoluta, sino un cambio de temperatura.</div>
+          <div class="warn">Confusión frecuente: usar la fórmula completa de °F a °C cuando el dato es un salto térmico. Para ΔT solo se usa el factor 5/9 o 9/5.</div>
+          <div class="memo">Frase útil: “En un cambio de temperatura, 1 K equivale a 1 °C”.</div>
+        </div>
+      </details>
+    </section>
+
+    <section id="tema3" class="block">
+      <h2 class="section-title"><span class="num">3</span>El átomo</h2>
+      <details class="topic" open>
+        <summary><span class="summary-left"><span>Evolución histórica y modelos atómicos</span><span class="tag">Conceptual</span></span><span>▾</span></summary>
+        <div class="topic-body">
+          <div class="cards-3">
+            <div class="panel">
+              <h3>Dalton</h3>
+              <p>Propuso que la materia está formada por átomos y que los átomos de un mismo elemento son iguales en masa y propiedades. En el curso se usa como punto de partida histórico.</p>
+            </div>
+            <div class="panel">
+              <h3>Thomson</h3>
+              <p>Con el tubo de rayos catódicos concluyó la existencia del electrón. Su modelo plantea una esfera positiva con electrones distribuidos en el interior.</p>
+            </div>
+            <div class="panel">
+              <h3>Rutherford y Bohr</h3>
+              <p>Rutherford propone un núcleo pequeño, denso y positivo; Bohr organiza electrones en niveles energéticos definidos. Ambos sirven de puente hacia el modelo actual.</p>
+            </div>
+          </div>
+          <div class="memo">Respuesta corta útil: “Thomson descubre el electrón; Rutherford concentra masa y carga positiva en el núcleo; Bohr introduce niveles de energía”.</div>
+        </div>
+      </details>
+
+      <details class="topic">
+        <summary><span class="summary-left"><span>Estructura del átomo y partículas subatómicas</span><span class="tag">Sale mucho</span></span><span>▾</span></summary>
+        <div class="topic-body">
+          <div class="cards-2">
+            <div class="panel">
+              <h3>Dos regiones</h3>
+              <ul>
+                <li><strong>Núcleo:</strong> contiene protones y neutrones, concentra casi toda la masa y toda la carga positiva.</li>
+                <li><strong>Periferia o corteza:</strong> contiene electrones, responsables de la carga negativa.</li>
+              </ul>
+            </div>
+            <div class="panel">
+              <h3>Partículas</h3>
+              <ul>
+                <li>Electrón: carga −1, masa muy pequeña.</li>
+                <li>Protón: carga +1.</li>
+                <li>Neutrón: carga 0.</li>
+                <li>En examen aparece además que protones y neutrones se componen de quarks.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Símbolo</th><th>Qué representa</th><th>Cálculo usual</th></tr></thead>
+              <tbody>
+                <tr><td>Z</td><td>Número atómico</td><td>Protones</td></tr>
+                <tr><td>A</td><td>Número másico</td><td>Protones + neutrones</td></tr>
+                <tr><td>n</td><td>Neutrones</td><td>A − Z</td></tr>
+                <tr><td>e⁻</td><td>Electrones</td><td>Igual a Z en átomo neutro; ajustar por la carga en iones</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="idea">Para especies cargadas, primero identifica si es catión o anión. Un catión tiene menos electrones que protones; un anión tiene más electrones que protones.</div>
+          <div class="warn">Error típico: cambiar protones cuando se forma un ion. Al ionizarse cambian electrones, no protones. Si cambian protones, cambia el elemento.</div>
+          <div class="memo">Frase exacta útil: “El número atómico identifica al elemento porque corresponde al número de protones”.</div>
+        </div>
+      </details>
+
+      <details class="topic">
+        <summary><span class="summary-left"><span>Isótopos, iones e interpretación de especies</span><span class="tag">Completar cuadros</span></span><span>▾</span></summary>
+        <div class="topic-body">
+          <div class="panel">
+            <h3>Qué sí significa cada cosa</h3>
+            <ul>
+              <li><strong>Isótopos:</strong> mismo Z, distinto A; por tanto, mismo número de protones y distinto número de neutrones.</li>
+              <li><strong>Iones:</strong> misma identidad del elemento, distinto número de electrones por ganancia o pérdida de e⁻.</li>
+              <li><strong>Isoelectrónicas:</strong> especies diferentes con la misma cantidad de electrones.</li>
+            </ul>
+          </div>
+          <div class="warn">No significa lo mismo “isótopo” que “ion”. En isótopos cambia el número de neutrones; en iones cambia el número de electrones.</div>
+          <div class="exam-box">Patrón del profesor: da una especie y pide completar Z, A, protones, neutrones, electrones y carga; o bien pide decir qué pasa si gana neutrones, pierde protones o pierde electrones.</div>
+        </div>
+      </details>
+    </section>
+
+    <section id="tema4" class="block">
+      <h2 class="section-title"><span class="num">4</span>Modelo mecánico cuántico y estructura electrónica</h2>
+      <details class="topic" open>
+        <summary><span class="summary-left"><span>Números cuánticos</span><span class="tag">Fundamental</span></span><span>▾</span></summary>
+        <div class="topic-body">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Número cuántico</th><th>Símbolo</th><th>Qué describe</th><th>Valores permitidos</th></tr></thead>
+              <tbody>
+                <tr><td>Principal</td><td>n</td><td>Nivel principal de energía y distancia promedio al núcleo</td><td>1, 2, 3, 4…</td></tr>
+                <tr><td>Secundario o azimutal</td><td>l</td><td>Subnivel y forma del orbital</td><td>0 a n−1</td></tr>
+                <tr><td>Magnético</td><td>m<sub>l</sub></td><td>Orientación del orbital</td><td>de −l a +l</td></tr>
+                <tr><td>Spin</td><td>m<sub>s</sub></td><td>Giro del electrón</td><td>+1/2 o −1/2</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cards-2">
+            <div class="panel">
+              <h3>Equivalencia de l</h3>
+              <ul>
+                <li>l = 0 → s</li>
+                <li>l = 1 → p</li>
+                <li>l = 2 → d</li>
+                <li>l = 3 → f</li>
+              </ul>
+            </div>
+            <div class="panel">
+              <h3>Capacidad por subnivel</h3>
+              <ul>
+                <li>s: 2 electrones</li>
+                <li>p: 6 electrones</li>
+                <li>d: 10 electrones</li>
+                <li>f: 14 electrones</li>
+              </ul>
+            </div>
+          </div>
+          <div class="warn">Trampa muy común: el número cuántico que describe la orientación del orbital es <strong>m<sub>l</sub></strong>, no n, ni l, ni m<sub>s</sub>.</div>
+          <div class="memo">Respuesta exacta útil: “m<sub>l</sub> describe la orientación del orbital y m<sub>s</sub> el giro del electrón”.</div>
+        </div>
+      </details>
+
+      <details class="topic">
+        <summary><span class="summary-left"><span>Principios para construir configuraciones electrónicas</span><span class="tag">Muy evaluado</span></span><span>▾</span></summary>
+        <div class="topic-body">
+          <div class="cards-3">
+            <div class="panel">
+              <h3>Aufbau</h3>
+              <p>Los electrones ocupan primero los orbitales de menor energía.</p>
+            </div>
+            <div class="panel">
+              <h3>Pauli</h3>
+              <p>No puede haber dos electrones en un mismo átomo con los cuatro números cuánticos iguales; por orbital caben máximo dos electrones.</p>
+            </div>
+            <div class="panel">
+              <h3>Hund</h3>
+              <p>En orbitales de igual energía, los electrones se distribuyen primero desapareados con espines paralelos.</p>
+            </div>
+          </div>
+          <div class="formula">Orden usual de llenado: 1s, 2s, 2p, 3s, 3p, 4s, 3d, 4p, 5s, 4d, 5p, 6s, 4f, 5d, 6p, 7s…</div>
+          <div class="idea">El curso conecta configuración electrónica con electrones de valencia, números cuánticos del electrón diferenciante, tabla periódica y números de oxidación.</div>
+          <div class="warn">Error común: confundir configuración electrónica con diagrama de orbitales. La configuración usa subniveles con exponentes; el diagrama representa orbitales con cajas o líneas y flechas.</div>
+        </div>
+      </details>
+
+      <details class="topic">
+        <summary><span class="summary-left"><span>Heisenberg, Schrödinger y qué sí dice el modelo actual</span><span class="tag">Teoría corta</span></span><span>▾</span></summary>
+        <div class="topic-body">
+          <div class="panel">
+            <h3>Puntos examinables</h3>
+            <ul>
+              <li>El modelo actual describe electrones mediante funciones de onda y regiones de alta probabilidad llamadas orbitales.</li>
+              <li>El principio de incertidumbre de Heisenberg dice que no es posible conocer simultáneamente la posición y el momento del electrón con precisión absoluta.</li>
+              <li>La probabilidad se relaciona con Ψ².</li>
+            </ul>
+          </div>
+          <div class="warn">No dice que se conozca la posición exacta del electrón. Justamente el modelo cuántico abandona esa idea exacta del electrón en una órbita clásica.</div>
+          <div class="memo">Frase exacta útil: “El orbital es una región de alta probabilidad de encontrar al electrón”.</div>
+        </div>
+      </details>
+    </section>
+
+    <section id="tema5" class="block">
+      <h2 class="section-title"><span class="num">5</span>Tabla periódica y propiedades periódicas</h2>
+      <details class="topic" open>
+        <summary><span class="summary-left"><span>Cómo se ordena la tabla y qué permite inferir</span><span class="tag">Base</span></span><span>▾</span></summary>
+        <div class="topic-body">
+          <div class="panel">
+            <h3>Idea base</h3>
+            <p>La tabla periódica ordena los elementos por número atómico creciente. En el curso también se relaciona con el subnivel donde entra el electrón diferenciante y con el bloque s, p, d o f.</p>
+          </div>
+          <div class="memo">Respuesta exacta útil: “Los elementos se ordenan por número atómico creciente”.</div>
+          <div class="warn">Error frecuente: responder masa atómica promedio o número másico. El criterio de orden es Z.</div>
+        </div>
+      </details>
+
+      <details class="topic">
+        <summary><span class="summary-left"><span>Electrones de valencia, carga nuclear y apantallamiento</span><span class="tag">Conecta varios temas</span></span><span>▾</span></summary>
+        <div class="topic-body">
+          <div class="cards-2">
+            <div class="panel">
+              <h3>Electrones de valencia</h3>
+              <p>Son los del último nivel de energía y son los que se usan para combinarse. El curso los conecta con estructuras de Lewis y con números de oxidación posibles en elementos representativos.</p>
+            </div>
+            <div class="panel">
+              <h3>Tres conceptos que se confunden</h3>
+              <ul>
+                <li><strong>Carga nuclear:</strong> depende del número de protones.</li>
+                <li><strong>Efecto de pantalla o apantallamiento:</strong> disminución de atracción por la presencia de otros electrones.</li>
+                <li><strong>Carga nuclear efectiva:</strong> atracción neta sentida por un electrón.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="warn">No todos los iones de un mismo elemento tienen distinta carga nuclear. La carga nuclear depende de protones, y el número de protones no cambia al formar iones.</div>
+          <div class="exam-box">Patrón de examen: ordenar especies por tamaño o decidir cuál tiene mayor apantallamiento, mayor electronegatividad o mayor energía de ionización.</div>
+        </div>
+      </details>
+
+      <details class="topic">
+        <summary><span class="summary-left"><span>Tendencias periódicas importantes</span><span class="tag">Muy preguntable</span></span><span>▾</span></summary>
+        <div class="topic-body">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Propiedad</th><th>Tendencia general</th><th>Qué debes recordar</th></tr></thead>
+              <tbody>
+                <tr><td>Radio atómico</td><td>Aumenta al bajar en un grupo y hacia la izquierda.</td><td>Más niveles energéticos suele significar mayor tamaño.</td></tr>
+                <tr><td>Energía de ionización</td><td>Aumenta hacia la derecha y hacia arriba.</td><td>Quitar electrones sucesivos requiere cada vez más energía.</td></tr>
+                <tr><td>Electronegatividad</td><td>Aumenta hacia la derecha y hacia arriba.</td><td>Flúor muy alta; gases nobles usualmente fuera del patrón escolar.</td></tr>
+                <tr><td>Radio iónico</td><td>Cationes más pequeños que el átomo; aniones más grandes.</td><td>En series isoelectrónicas, a mayor Z, menor radio.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="idea">Para especies del mismo elemento: mientras más positiva sea la carga, menor radio; mientras más negativa, mayor radio.</div>
+          <div class="warn">Error típico: decir que la afinidad electrónica es “la energía para quitar un electrón”. Esa definición corresponde a energía de ionización.</div>
+          <div class="memo">Frase exacta útil: “La segunda energía de ionización es mayor que la primera”.</div>
+        </div>
+      </details>
+
+      <details class="topic">
+        <summary><span class="summary-left"><span>Números de oxidación y estabilidad electrónica</span><span class="tag">Desarrollo</span></span><span>▾</span></summary>
+        <div class="topic-body">
+          <div class="panel">
+            <h3>Cómo justifica el curso los números de oxidación</h3>
+            <p>En elementos representativos, los números de oxidación se justifican comparando la configuración electrónica de valencia con estructuras más estables: perder electrones para quedar como gas noble anterior o ganar para completar octeto.</p>
+          </div>
+          <div class="cards-2">
+            <div class="panel">
+              <h3>Ejemplo conceptual con fósforo y arsénico</h3>
+              <p>Con valencia <code class="inline">ns² np³</code>, pueden justificar 3+ por pérdida de tres electrones p y 5+ por pérdida de cinco electrones de valencia. Ese mismo tipo de justificación aparece explícitamente en exámenes.</p>
+            </div>
+            <div class="panel">
+              <h3>Qué revisar al justificar</h3>
+              <ul>
+                <li>Configuración de valencia.</li>
+                <li>Electrones que se pierden o ganan.</li>
+                <li>Estructura estable resultante.</li>
+                <li>Si el número propuesto sí tiene sentido para el elemento.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="warn">Si te preguntan si un número de oxidación “se puede justificar”, no basta con decir sí o no. El profesor pide la relación con la estructura electrónica.</div>
+        </div>
+      </details>
+    </section>
+
+    <section id="tema6" class="block">
+      <h2 class="section-title"><span class="num">6</span>Grupos de la tabla periódica</h2>
+      <details class="topic" open>
+        <summary><span class="summary-left"><span>Familias representativas y comportamiento general</span><span class="tag">Complemento del tema 5</span></span><span>▾</span></summary>
+        <div class="topic-body">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Grupo</th><th>Configuración general</th><th>Ideas útiles</th></tr></thead>
+              <tbody>
+                <tr><td>1A</td><td>ns¹</td><td>Metales alcalinos, forman M⁺, reactividad aumenta hacia abajo.</td></tr>
+                <tr><td>2A</td><td>ns²</td><td>Alcalinotérreos, forman M²⁺.</td></tr>
+                <tr><td>3A</td><td>ns²np¹</td><td>Suele aparecer Al con comportamiento metálico.</td></tr>
+                <tr><td>4A</td><td>ns²np²</td><td>C, Si, Ge, Sn, Pb; mezcla de no metal, metaloides y metales.</td></tr>
+                <tr><td>5A</td><td>ns²np³</td><td>N, P, As, Sb, Bi; importante para 3+ y 5+.</td></tr>
+                <tr><td>6A</td><td>ns²np⁴</td><td>O, S, Se, Te, Po; formación de óxidos y oxoácidos muy relacionada con nomenclatura.</td></tr>
+                <tr><td>7A</td><td>ns²np⁵</td><td>Halógenos, forman X⁻.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="panel">
+            <h3>Para qué sirve este tema en examen</h3>
+            <p>No suele preguntarse aislado tanto como los otros, pero sí ayuda a justificar reactividad, números de oxidación, electronegatividad y fórmulas de compuestos inorgánicos.</p>
+          </div>
+          <div class="warn">Este bloque aparece en tus clases, pero en el material compartido pesa menos que propiedades periódicas y nomenclatura. Por eso conviene estudiarlo como apoyo y no como tema suelto.</div>
+        </div>
+      </details>
+    </section>
+
+    <section id="tema7" class="block">
+      <h2 class="section-title"><span class="num">7</span>Nomenclatura inorgánica hasta sales</h2>
+      <details class="topic" open>
+        <summary><span class="summary-left"><span>Iones simples, iones compuestos y clasificación básica</span><span class="tag">Muy evaluado</span></span><span>▾</span></summary>
+        <div class="topic-body">
+          <div class="cards-2">
+            <div class="panel">
+              <h3>Iones simples</h3>
+              <p>Están compuestos por un solo tipo de elemento. Pueden ser cationes o aniones. Ejemplos trabajados: Li⁺, Cl⁻.</p>
+            </div>
+            <div class="panel">
+              <h3>Iones compuestos</h3>
+              <p>Están formados por más de un elemento y conservan una carga global. Ejemplos: SO₄²⁻, NH₄⁺, BrO₃⁻, cromato.</p>
+            </div>
+          </div>
+          <div class="memo">Frase útil: “Ion simple = un solo elemento; ion compuesto = más de un elemento”.</div>
+          <div class="warn">No confundas una molécula neutra con un ion compuesto. Por ejemplo, NH₃ no es ion compuesto porque no tiene carga.</div>
+        </div>
+      </details>
+
+      <details class="topic">
+        <summary><span class="summary-left"><span>Sales simples y sales compuestas</span><span class="tag">Completar y nombrar</span></span><span>▾</span></summary>
+        <div class="topic-body">
+          <div class="cards-2">
+            <div class="panel">
+              <h3>Cómo se nombran</h3>
+              <p>Nombre del anión + “de” + nombre del catión. Si el metal tiene varios números de oxidación, se usa Stock con número romano.</p>
+            </div>
+            <div class="panel">
+              <h3>Cómo escribir la fórmula</h3>
+              <ol>
+                <li>Escribe primero el metal o catión.</li>
+                <li>Luego el anión simple o compuesto.</li>
+                <li>Intercambia las cargas como subíndices.</li>
+                <li>Simplifica si corresponde.</li>
+                <li>Usa paréntesis cuando un ion compuesto aparece más de una vez.</li>
+              </ol>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Especie</th><th>Nombre</th><th>Tipo</th></tr></thead>
+              <tbody>
+                <tr><td>BaBr₂</td><td>Bromuro de bario</td><td>Sal simple</td></tr>
+                <tr><td>CsIO₂</td><td>Yodito de cesio</td><td>Sal compuesta</td></tr>
+                <tr><td>(NH₄)₂CO₃</td><td>Carbonato de amonio</td><td>Sal compuesta</td></tr>
+                <tr><td>CrCl₃</td><td>Cloruro de cromo (III)</td><td>Sal simple</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="warn">Error frecuente: olvidar que la fórmula se escribe colocando primero el catión. También es muy común no usar paréntesis cuando el ion compuesto se repite.</div>
+        </div>
+      </details>
+
+      <details class="topic">
+        <summary><span class="summary-left"><span>Ácidos, óxidos, hidróxidos e hidruros</span><span class="tag">Clasificar y nombrar</span></span><span>▾</span></summary>
+        <div class="topic-body">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Familia</th><th>Idea base</th><th>Regla de nombre</th><th>Ejemplo</th></tr></thead>
+              <tbody>
+                <tr><td>Ácidos hidrácidos</td><td>H con anión terminado en “uro”; en disolución acuosa</td><td>Ácido + raíz + hídrico</td><td>HCl(ac): ácido clorhídrico</td></tr>
+                <tr><td>Ácidos oxácidos</td><td>H con ion compuesto oxigenado</td><td>ato → ico, ito → oso</td><td>H₂CO₃: ácido carbónico; H₃PO₃: ácido fosforoso</td></tr>
+                <tr><td>Óxidos metálicos</td><td>Metal + oxígeno</td><td>Óxido de + metal (Stock si aplica)</td><td>CuO: óxido de cobre (II)</td></tr>
+                <tr><td>Óxidos no metálicos</td><td>No metal + oxígeno</td><td>Nomenclatura estequiométrica con prefijos</td><td>CO₂: dióxido de carbono</td></tr>
+                <tr><td>Hidróxidos</td><td>Metal + OH⁻</td><td>Hidróxido de + metal</td><td>Co(OH)₃: hidróxido de cobalto (III)</td></tr>
+                <tr><td>Hidruros</td><td>Metal + H⁻</td><td>Hidruro de + metal</td><td>CaH₂: hidruro de calcio</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="idea">En tus materiales, los ácidos hidrácidos siempre se escriben en disolución acuosa: <code class="inline">(ac)</code>.</div>
+          <div class="warn">Confusión frecuente: en óxidos no metálicos no se trabaja igual que en óxidos metálicos; se insiste en la nomenclatura estequiométrica con prefijos como mono-, di-, tri-.</div>
+          <div class="memo">Frase útil: “ato cambia a ico e ito cambia a oso en los oxácidos”.</div>
+        </div>
+      </details>
+
+      <details class="topic">
+        <summary><span class="summary-left"><span>Lo que más se repite en examen de nomenclatura</span><span class="tag">Enfoque real</span></span><span>▾</span></summary>
+        <div class="topic-body">
+          <div class="panel">
+            <h3>Patrones reales</h3>
+            <ul>
+              <li>Dar la fórmula y pedir nombre Stock.</li>
+              <li>Dar el nombre y pedir la fórmula.</li>
+              <li>Clasificar como elemento, ion simple, ion compuesto, sal simple o sal compuesta.</li>
+              <li>Reconocer especies como BrO₃⁻, IO₄⁻, H₂PO₄⁻, cromato, sulfito ácido, fosfito diácido.</li>
+            </ul>
+          </div>
+          <div class="warn">En algunos exámenes aparecen especies que exigen conocer nombres de iones y también distinguir si la especie realmente es sal, ion o elemento. No basta con saber nombrar “más o menos”.</div>
+          <div class="memo">Respuesta corta útil: “En nomenclatura Stock, si el metal tiene más de un número de oxidación, se indica con número romano”.</div>
+        </div>
+      </details>
+    </section>
+
+    <section id="repaso" class="block">
+      <h2 class="section-title"><span class="num">8</span>Repaso final de respuestas exactas</h2>
+      <div class="flash-list">
+        <div class="flash-item">La química es la ciencia que estudia las propiedades, la composición, la estructura y el comportamiento de la materia.</div>
+        <div class="flash-item">Si un material homogéneo puede separarse por medios físicos, es una mezcla homogénea.</div>
+        <div class="flash-item">El número atómico corresponde al número de protones.</div>
+        <div class="flash-item">Los isótopos tienen igual número atómico y diferente número másico.</div>
+        <div class="flash-item">Al formar un ion cambian los electrones, no los protones.</div>
+        <div class="flash-item">El orbital es una región de alta probabilidad de encontrar al electrón.</div>
+        <div class="flash-item">No es posible conocer simultáneamente la posición y el momento del electrón con precisión absoluta.</div>
+        <div class="flash-item">El número cuántico magnético m<sub>l</sub> describe la orientación del orbital.</div>
+        <div class="flash-item">Los elementos se ordenan en la tabla periódica por número atómico creciente.</div>
+        <div class="flash-item">La electronegatividad aumenta hacia la derecha y hacia arriba en la tabla periódica.</div>
+        <div class="flash-item">Para un mismo elemento, el catión es más pequeño que el átomo y el anión es más grande.</div>
+        <div class="flash-item">La segunda energía de ionización es mayor que la primera.</div>
+        <div class="flash-item">Ion simple: formado por un solo elemento. Ion compuesto: formado por más de un elemento.</div>
+        <div class="flash-item">Nombre de una sal: nombre del anión + de + nombre del catión.</div>
+        <div class="flash-item">En ácidos oxácidos: ato → ico; ito → oso.</div>
+        <div class="flash-item">En un ΔT: ΔK = Δ°C y Δ°C = 5/9 Δ°F.</div>
+      </div>
+    </section>
+
+    <section id="simulacro" class="block">
+      <h2 class="section-title"><span class="num">9</span>Simulacro tipo examen</h2>
+      <div class="quiz-shell">
+        <div class="scorebar">
+          <div class="score-pill">Puntaje: <span id="score">0</span>/<span id="maxScore">100</span></div>
+          <div class="score-pill">Estado: <span id="statusText">Sin revisar</span></div>
+          <div class="score-pill">Formato: 100 preguntas tipo examen</div>
+        </div>
+        <div class="idea">Este simulacro largo mantiene el mismo diseño, pero ahora sigue mejor el estilo real del curso: escogencia única, completar, asociación y mini-problemas conceptuales.</div>
+        <div id="quizContainer"></div>
+        <div class="quiz-actions">
+          <button class="primary-btn" id="checkQuiz">Calificar simulacro</button>
+          <button class="secondary-btn" id="resetQuiz">Reiniciar</button>
+        </div>
+      </div>
+    </section></section>
+  </main>
+
+  <button class="secondary-btn back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Arriba</button>
+
+  <footer class="container">
+    <p>Este resumen fue organizado siguiendo la secuencia real observada en los materiales compartidos: fundamentos, SI, átomo, modelo cuántico, tabla periódica/propiedades, grupos y nomenclatura hasta sales. Cuando un detalle no apareció suficientemente desarrollado en los materiales, se dejó solo hasta donde el curso sí lo sugiere y sin inventar bloques ajenos al enfoque visto.</p>
+  </footer>
+
+  <script>
+    (function(){
+      const btn = document.querySelector('[data-theme-toggle]');
+      const root = document.documentElement;
+      let mode = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      root.setAttribute('data-theme', mode);
+      btn.addEventListener('click', ()=>{
+        mode = mode === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', mode);
+      });
+    })();
+
+    const quizData = [
+      {id:'q1',type:'mc',q:'1) El aire se clasifica como:',options:{a:'Elemento',b:'Mezcla homogénea',c:'Mezcla heterogénea',d:'Compuesto'},answer:'b',ex:'El aire se trabaja como mezcla homogénea.'},
+      {id:'q2',type:'mc',q:'2) El tostado del café y la molienda del café son, respectivamente:',options:{a:'Físico y químico',b:'Ambos físicos',c:'Químico y físico',d:'Ambos químicos'},answer:'c',ex:'En el examen, el tostado se reconoce como cambio químico y la molienda como cambio físico.'},
+      {id:'q3',type:'mc',q:'3) ¿Cuál pareja corresponde a propiedad extensiva e intensiva, en ese orden?',options:{a:'Volumen y densidad',b:'Temperatura y masa',c:'Color y olor',d:'Punto de ebullición y área'},answer:'a',ex:'Volumen depende de la cantidad; densidad no.'},
+      {id:'q4',type:'mc',q:'4) El criterio de orden en la tabla periódica es:',options:{a:'Número másico',b:'Número atómico',c:'Masa atómica promedio',d:'Número de neutrones'},answer:'b',ex:'La tabla se ordena por número atómico.'},
+      {id:'q5',type:'mc',q:'5) El principio de incertidumbre de Heisenberg establece que:',options:{a:'Solo se conoce la posición con precisión absoluta',b:'No se puede conocer simultáneamente posición y momento con precisión absoluta',c:'Solo se puede conocer el momento',d:'Describe únicamente el spin'},answer:'b',ex:'Heisenberg impide conocer simultáneamente posición y momento con precisión absoluta.'},
+      {id:'q6',type:'mc',q:'6) El número cuántico que describe la orientación del orbital es:',options:{a:'n',b:'l',c:'m_l',d:'m_s'},answer:'c',ex:'m_l describe la orientación del orbital.'},
+      {id:'q7',type:'fill2',q:'7) Complete: Los isótopos tienen igual número _____ y diferente número _____.',answers:[['atomico','numero atomico'],['masico','numero masico']],ex:'Isótopos: igual número atómico y diferente número másico.'},
+      {id:'q8',type:'fill1',q:'8) Complete: En un cambio de temperatura, Δ°C = _____ Δ°F.',answers:['5/9','5 / 9','0,5556','0.5556','0,56','0.56'],ex:'Para ΔT, Δ°C = 5/9 Δ°F.'},
+      {id:'q9',type:'match3',q:'9) Asociación: relaciona cada especie con su clasificación.',pairs:[['Br⁻','ion_simple'],['SO₄²⁻','ion_compuesto'],['As','elemento']],choices:[['','Selecciona'],['ion_simple','Ion simple'],['ion_compuesto','Ion compuesto'],['sal_simple','Sal simple'],['elemento','Elemento']],ex:'Br⁻ es ion simple, SO₄²⁻ es ion compuesto y As es elemento.'},
+      {id:'q10',type:'mc',q:'10) ¿Cuál nombre es correcto para CuO?',options:{a:'Óxido cuproso',b:'Monóxido de cobre',c:'Óxido de cobre',d:'Óxido de cobre (II)'},answer:'d',ex:'Como el cobre puede tener más de un estado de oxidación, se usa Stock: cobre (II).'},
+      {id:'q11',type:'mc',q:'11) HCl(ac) se nombra como:',options:{a:'Ácido clorhídrico',b:'Cloruro de hidrógeno',c:'Ácido clórico',d:'Ácido hipocloroso'},answer:'a',ex:'Los hidrácidos usan “ácido” + raíz + “hídrico”.'},
+      {id:'q12',type:'mc',q:'12) Para un mismo elemento, la especie de menor radio será normalmente:',options:{a:'El anión más negativo',b:'El átomo neutro',c:'El catión más positivo',d:'Todas iguales'},answer:'c',ex:'Más carga positiva implica menor radio para un mismo elemento.'},
+      {id:'q13',type:'mc',q:'13) Una muestra de agua de mar tomada directamente de una ola rompiendo en la playa se clasifica mejor como:',options:{a:'Sustancia pura',b:'Mezcla homogénea',c:'Mezcla heterogénea',d:'Compuesto'},answer:'c',ex:'En los exámenes viejos este ejemplo aparece como mezcla heterogénea.'},
+      {id:'q14',type:'mc',q:'14) La densidad del agua es una propiedad:',options:{a:'Extensiva',b:'Intensiva',c:'Química',d:'Nuclear'},answer:'b',ex:'La densidad no depende de la cantidad de muestra.'},
+      {id:'q15',type:'mc',q:'15) Quemar metano es ejemplo de:',options:{a:'Cambio físico y propiedad física',b:'Cambio químico y propiedad química',c:'Cambio físico y propiedad química',d:'Cambio químico y propiedad física'},answer:'b',ex:'La combustión es un cambio químico y refleja reactividad química.'},
+      {id:'q16',type:'mc',q:'16) ¿Cuál unidad es básica del SI para temperatura?',options:{a:'°C',b:'°F',c:'K',d:'Pa'},answer:'c',ex:'La unidad básica del SI para temperatura es el kelvin.'},
+      {id:'q17',type:'mc',q:'17) Entre número y unidad debe ir:',options:{a:'Guion',b:'Paréntesis',c:'Espacio',d:'Punto'},answer:'c',ex:'Regla de escritura del SI: número y unidad se separan con espacio.'},
+      {id:'q18',type:'mc',q:'18) Los símbolos de las unidades:',options:{a:'Se pluralizan',b:'Llevan punto siempre',c:'Van en mayúscula siempre',d:'No se pluralizan'},answer:'d',ex:'Los símbolos de unidades jamás se pluralizan.'},
+      {id:'q19',type:'mc',q:'19) Si la temperatura es un cambio, entonces 1 K equivale a:',options:{a:'1 °F',b:'1 °C',c:'273,15 °C',d:'32 °F'},answer:'b',ex:'En cambios de temperatura, ΔK = Δ°C.'},
+      {id:'q20',type:'mc',q:'20) El número de neutrones se calcula como:',options:{a:'Z − A',b:'A + Z',c:'A − Z',d:'e− − p+'},answer:'c',ex:'Neutrones = número másico − número atómico.'},
+      {id:'q21',type:'mc',q:'21) El número atómico corresponde a:',options:{a:'Protones',b:'Neutrones',c:'Protones + neutrones',d:'Electrones siempre'},answer:'a',ex:'El número atómico identifica al elemento porque equivale a protones.'},
+      {id:'q22',type:'mc',q:'22) Al formar un catión, el átomo:',options:{a:'Gana protones',b:'Pierde electrones',c:'Gana neutrones',d:'Pierde protones'},answer:'b',ex:'La ionización cambia electrones, no protones.'},
+      {id:'q23',type:'mc',q:'23) Dos especies son isoelectrónicas cuando tienen igual número de:',options:{a:'Protones',b:'Neutrones',c:'Electrones',d:'Orbitales p'},answer:'c',ex:'Isoelectrónicas significa misma cantidad de electrones.'},
+      {id:'q24',type:'mc',q:'24) Protones y neutrones están formados por:',options:{a:'Iones',b:'Quarks',c:'Fotones',d:'Orbitales'},answer:'b',ex:'En el examen aparece explícitamente que protones y neutrones se componen de quarks.'},
+      {id:'q25',type:'mc',q:'25) La región más densa del átomo es:',options:{a:'La periferia',b:'La nube electrónica',c:'El núcleo',d:'El subnivel p'},answer:'c',ex:'El núcleo concentra casi toda la masa del átomo.'},
+      {id:'q26',type:'mc',q:'26) Según el modelo mecánico cuántico, el electrón se describe como:',options:{a:'Una partícula fija en órbita circular exacta',b:'Una función de onda con región probable llamada orbital',c:'Un protón pequeño',d:'Una masa sin energía'},answer:'b',ex:'El modelo actual describe orbitales como regiones de alta probabilidad.'},
+      {id:'q27',type:'mc',q:'27) El cuadrado de la función de onda Ψ² representa:',options:{a:'La carga del electrón',b:'La masa del orbital',c:'La densidad de probabilidad',d:'La energía nuclear total'},answer:'c',ex:'Ψ² se interpreta como densidad de probabilidad.'},
+      {id:'q28',type:'mc',q:'28) Para l = 2, el subnivel es:',options:{a:'s',b:'p',c:'d',d:'f'},answer:'c',ex:'La equivalencia estándar es 0=s, 1=p, 2=d, 3=f.'},
+      {id:'q29',type:'mc',q:'29) El subnivel p puede alojar como máximo:',options:{a:'2 electrones',b:'6 electrones',c:'10 electrones',d:'14 electrones'},answer:'b',ex:'p tiene tres orbitales y cada uno admite dos electrones.'},
+      {id:'q30',type:'mc',q:'30) El principio de Hund indica que:',options:{a:'Se llenan primero los orbitales de menor energía',b:'Dos electrones del mismo orbital tienen espines opuestos',c:'Los orbitales degenerados se ocupan primero con electrones desapareados',d:'No existe el spin'},answer:'c',ex:'Hund favorece electrones desapareados antes de aparear.'},
+      {id:'q31',type:'mc',q:'31) El principio de Pauli establece que:',options:{a:'El átomo no puede tener neutrones',b:'Máximo dos electrones por orbital con espines opuestos',c:'Todos los electrones deben tener el mismo spin',d:'Los orbitales p se llenan primero'},answer:'b',ex:'Pauli: dos electrones por orbital como máximo y con spins opuestos.'},
+      {id:'q32',type:'mc',q:'32) ¿Cuál conjunto de números cuánticos es imposible?',options:{a:'n=3, l=2, m_l=-1, m_s=+1/2',b:'n=2, l=2, m_l=0, m_s=-1/2',c:'n=4, l=1, m_l=1, m_s=+1/2',d:'n=1, l=0, m_l=0, m_s=-1/2'},answer:'b',ex:'Si n=2, entonces l solo puede ser 0 o 1.'},
+      {id:'q33',type:'mc',q:'33) El orden general de llenado correcto inicia como:',options:{a:'1s, 2p, 2s, 3s',b:'1s, 2s, 2p, 3s',c:'1s, 2s, 3s, 2p',d:'1p, 2s, 2p, 3d'},answer:'b',ex:'El curso usa el orden de Aufbau.'},
+      {id:'q34',type:'mc',q:'34) En la tabla periódica, la electronegatividad aumenta hacia:',options:{a:'Abajo y a la izquierda',b:'Abajo y a la derecha',c:'Arriba y a la derecha',d:'Arriba y a la izquierda'},answer:'c',ex:'Tendencia general: hacia arriba y a la derecha.'},
+      {id:'q35',type:'mc',q:'35) El radio atómico aumenta hacia:',options:{a:'Arriba y a la derecha',b:'Abajo y a la izquierda',c:'Solo hacia la derecha',d:'Solo hacia arriba'},answer:'b',ex:'Más niveles y menor atracción efectiva suelen aumentar el tamaño.'},
+      {id:'q36',type:'mc',q:'36) La energía de ionización generalmente aumenta hacia:',options:{a:'La derecha y arriba',b:'La izquierda y abajo',c:'Solo hacia abajo',d:'No sigue tendencia'},answer:'a',ex:'Cuesta más remover electrones cuando la atracción nuclear efectiva es mayor.'},
+      {id:'q37',type:'mc',q:'37) En una serie isoelectrónica, la especie con mayor Z tiene:',options:{a:'Mayor radio',b:'Menor radio',c:'Igual radio',d:'Más neutrones siempre'},answer:'b',ex:'A mayor carga nuclear sobre el mismo número de electrones, menor radio.'},
+      {id:'q38',type:'mc',q:'38) Para el mismo elemento, un anión comparado con el átomo neutro suele ser:',options:{a:'Más pequeño',b:'Igual de grande',c:'Más grande',d:'Más denso solamente'},answer:'c',ex:'Ganar electrones aumenta repulsión electrónica y el radio.'},
+      {id:'q39',type:'mc',q:'39) Los elementos del grupo 1A se llaman:',options:{a:'Halógenos',b:'Alcalinos',c:'Alcalinotérreos',d:'Gases nobles'},answer:'b',ex:'Grupo 1A = metales alcalinos.'},
+      {id:'q40',type:'mc',q:'40) Los elementos del grupo 17 se llaman:',options:{a:'Gases nobles',b:'Metales de transición',c:'Halógenos',d:'Actínidos'},answer:'c',ex:'El grupo 17 corresponde a los halógenos.'},
+      {id:'q41',type:'mc',q:'41) La configuración externa típica de los halógenos es:',options:{a:'ns2np5',b:'ns1',c:'ns2',d:'ns2np6'},answer:'a',ex:'Los halógenos tienen siete electrones de valencia.'},
+      {id:'q42',type:'mc',q:'42) La configuración externa típica de los gases nobles es:',options:{a:'ns2np5',b:'ns2np6',c:'ns1',d:'(n-1)d10ns2np5'},answer:'b',ex:'Los gases nobles presentan capa de valencia completa.'},
+      {id:'q43',type:'mc',q:'43) Un metal del grupo 2A tiende a formar:',options:{a:'Aniones 2−',b:'Cationes 2+',c:'Aniones 1−',d:'Cationes 1+'},answer:'b',ex:'Los alcalinotérreos suelen perder dos electrones.'},
+      {id:'q44',type:'mc',q:'44) La carga nuclear depende del número de:',options:{a:'Electrones',b:'Neutrones',c:'Protones',d:'Orbitales'},answer:'c',ex:'La carga nuclear está determinada por protones.'},
+      {id:'q45',type:'mc',q:'45) El apantallamiento se refiere a:',options:{a:'La ganancia de protones',b:'La disminución de atracción por otros electrones',c:'La pérdida de neutrones',d:'La masa del orbital'},answer:'b',ex:'Otros electrones reducen la atracción núcleo-electrón.'},
+      {id:'q46',type:'mc',q:'46) La segunda energía de ionización es:',options:{a:'Menor que la primera',b:'Igual a la primera',c:'Mayor que la primera',d:'Siempre negativa'},answer:'c',ex:'Quitar electrones sucesivos cuesta cada vez más energía.'},
+      {id:'q47',type:'mc',q:'47) ¿Cuál especie es un ion compuesto?',options:{a:'Cl−',b:'Na+',c:'NH4+',d:'Mg'},answer:'c',ex:'NH4+ tiene más de un elemento y carga global.'},
+      {id:'q48',type:'mc',q:'48) ¿Cuál especie corresponde a un elemento?',options:{a:'As',b:'SO4^2−',c:'BaBr2',d:'H2PO4−'},answer:'a',ex:'As escrito sin carga ni combinación representa al elemento arsénico.'},
+      {id:'q49',type:'mc',q:'49) BaBr2 se clasifica como:',options:{a:'Ion simple',b:'Ion compuesto',c:'Sal simple',d:'Elemento'},answer:'c',ex:'Metal + anión simple: sal simple.'},
+      {id:'q50',type:'mc',q:'50) (NH4)2CO3 se clasifica como:',options:{a:'Elemento',b:'Sal compuesta',c:'Ion compuesto',d:'Óxido metálico'},answer:'b',ex:'Está formada por dos iones compuestos: amonio y carbonato.'},
+      {id:'q51',type:'mc',q:'51) BrO3− se nombra como:',options:{a:'Bromato',b:'Bromito',c:'Hipobromito',d:'Perbromato'},answer:'a',ex:'En la serie usual, BrO3− corresponde a bromato.'},
+      {id:'q52',type:'mc',q:'52) SO4^2− se nombra como:',options:{a:'Sulfito',b:'Sulfuro',c:'Sulfato',d:'Tiosulfato'},answer:'c',ex:'SO4^2− es sulfato.'},
+      {id:'q53',type:'mc',q:'53) El nombre correcto de CrCl3 es:',options:{a:'Cloruro de cromo',b:'Cloruro crómico',c:'Cloruro de cromo (III)',d:'Tricloruro de cromo siempre'},answer:'c',ex:'Con Stock se indica el número de oxidación del metal variable.'},
+      {id:'q54',type:'mc',q:'54) En nomenclatura Stock, si el metal presenta varios números de oxidación, se usa:',options:{a:'Color',b:'Número romano',c:'Prefijo griego obligatorio',d:'Subíndice verbal'},answer:'b',ex:'Ese es el rasgo central de la nomenclatura Stock.'},
+      {id:'q55',type:'mc',q:'55) H2CO3 se nombra como:',options:{a:'Ácido carbonoso',b:'Ácido carbónico',c:'Carbonato de hidrógeno',d:'Ácido carboxílico'},answer:'b',ex:'ato → ico en oxoácidos.'},
+      {id:'q56',type:'mc',q:'56) H3PO3 se nombra como:',options:{a:'Ácido fosfórico',b:'Ácido fosforoso',c:'Fosfito de hidrógeno',d:'Ácido hipofosforoso'},answer:'b',ex:'ito → oso en oxoácidos.'},
+      {id:'q57',type:'mc',q:'57) Co(OH)3 se nombra como:',options:{a:'Hidróxido de cobalto',b:'Hidróxido cobáltico',c:'Hidróxido de cobalto (III)',d:'Trihidróxido de cobalto'},answer:'c',ex:'Con Stock, Co tiene número de oxidación +3.'},
+      {id:'q58',type:'mc',q:'58) CaH2 es:',options:{a:'Hidruro de calcio',b:'Ácido cálcico',c:'Hidróxido de calcio',d:'Óxido de calcio'},answer:'a',ex:'Metal + hidruro → hidruro de metal.'},
+      {id:'q59',type:'mc',q:'59) CO2 se nombra en este enfoque como:',options:{a:'Óxido de carbono',b:'Dióxido de carbono',c:'Óxido de carbono (IV)',d:'Carbonato de oxígeno'},answer:'b',ex:'En óxidos no metálicos se enfatiza nomenclatura estequiométrica con prefijos.'},
+      {id:'q60',type:'mc',q:'60) Cuando un ion compuesto aparece más de una vez en una fórmula, se debe usar:',options:{a:'Comas',b:'Subíndice en el metal',c:'Paréntesis',d:'Barra inclinada'},answer:'c',ex:'Ejemplo clásico: (NH4)2CO3.'},
+      {id:'q61',type:'fill1',q:'61) Complete: La tabla periódica se ordena por número _____.',answers:['atomico','numero atomico'],ex:'La tabla se organiza por número atómico.'},
+      {id:'q62',type:'fill1',q:'62) Complete: El número cuántico de spin se simboliza como _____.',answers:['ms','m_s'],ex:'El número cuántico de spin es m_s.'},
+      {id:'q63',type:'fill1',q:'63) Complete: La región de alta probabilidad de encontrar al electrón se llama _____.',answers:['orbital'],ex:'La palabra clave es orbital.'},
+      {id:'q64',type:'fill1',q:'64) Complete: En el SI, la unidad básica de masa es el _____.',answers:['kilogramo','kg'],ex:'La unidad básica de masa es el kilogramo.'},
+      {id:'q65',type:'fill1',q:'65) Complete: Los protones tienen carga _____.',answers:['positiva','+1','positiva (+1)'],ex:'La carga del protón es positiva.'},
+      {id:'q66',type:'fill1',q:'66) Complete: Los símbolos de unidades no se _____.',answers:['pluralizan','pluralizar'],ex:'Regla central de escritura del SI.'},
+      {id:'q67',type:'fill1',q:'67) Complete: Para un mismo elemento, el catión tiene radio más ____ que el átomo.',answers:['pequeno','pequeño','menor'],ex:'El catión resulta más pequeño.'},
+      {id:'q68',type:'fill1',q:'68) Complete: En un oxoácido, “ato” cambia a _____.',answers:['ico'],ex:'ato → ico.'},
+      {id:'q69',type:'fill1',q:'69) Complete: En un oxoácido, “ito” cambia a _____.',answers:['oso'],ex:'ito → oso.'},
+      {id:'q70',type:'fill1',q:'70) Complete: El grupo 1A corresponde a los metales _____.',answers:['alcalinos'],ex:'Grupo 1A = alcalinos.'},
+      {id:'q71',type:'fill2',q:'71) Complete: Un catión se forma por _____ electrones; un anión por _____ electrones.',answers:[['perder','perdida de','perdida'],['ganar','ganancia de','ganancia']],ex:'Catión: pérdida de electrones; anión: ganancia de electrones.'},
+      {id:'q72',type:'fill2',q:'72) Complete: En la especie ^A_ZX, Z representa el número _____ y A el número _____.',answers:[['atomico','numero atomico'],['masico','numero masico']],ex:'Z es número atómico y A número másico.'},
+      {id:'q73',type:'fill2',q:'73) Complete: En orbitales degenerados, primero se ubican electrones _____ con espines _____, según Hund.',answers:[['desapareados'],['paralelos']],ex:'Hund: desapareados y con espines paralelos.'},
+      {id:'q74',type:'fill2',q:'74) Complete: HCl(ac) es un ácido _____; H2CO3 es un ácido _____.',answers:[['hidrácido','hidraci do'],['oxacido','oxoacido','oxácido']],ex:'HCl(ac) es hidrácido; H2CO3 es oxácido.'},
+      {id:'q75',type:'fill2',q:'75) Complete: Los grupos 17 y 18 corresponden a _____ y _____, respectivamente.',answers:[['halogenos','halógenos'],['gases nobles','gas noble']],ex:'Grupo 17 = halógenos; grupo 18 = gases nobles.'},
+      {id:'q76',type:'match3',q:'76) Asociación: relaciona propiedad con tendencia general.',pairs:[['Radio atómico','izquierda_abajo'],['Electronegatividad','derecha_arriba'],['Energía de ionización','derecha_arriba']],choices:[['','Selecciona'],['izquierda_abajo','Aumenta hacia la izquierda y abajo'],['derecha_arriba','Aumenta hacia la derecha y arriba'],['sin_tendencia','No sigue tendencia']],ex:'Radio: izquierda/abajo; electronegatividad e ionización: derecha/arriba.'},
+      {id:'q77',type:'match3',q:'77) Asociación: relaciona especie con tipo.',pairs:[['NH4+','ion_compuesto'],['BaBr2','sal_simple'],['(NH4)2CO3','sal_compuesta']],choices:[['','Selecciona'],['ion_simple','Ion simple'],['ion_compuesto','Ion compuesto'],['sal_simple','Sal simple'],['sal_compuesta','Sal compuesta']],ex:'Se distingue por cantidad de elementos y por si la especie es neutra o iónica.'},
+      {id:'q78',type:'match3',q:'78) Asociación: relaciona símbolo con significado.',pairs:[['Z','numero_atomico'],['A','numero_masico'],['n','neutrones']],choices:[['','Selecciona'],['numero_atomico','Número atómico'],['numero_masico','Número másico'],['neutrones','Número de neutrones'],['electrones','Número de electrones']],ex:'Z = atómico, A = másico, n = neutrones.'},
+      {id:'q79',type:'match3',q:'79) Asociación: relaciona subnivel con capacidad máxima.',pairs:[['s','2'],['p','6'],['d','10']],choices:[['','Selecciona'],['2','2 electrones'],['6','6 electrones'],['10','10 electrones'],['14','14 electrones']],ex:'Capacidad máxima por subnivel: s=2, p=6, d=10.'},
+      {id:'q80',type:'match3',q:'80) Asociación: relaciona compuesto con nombre.',pairs:[['CaH2','hidruro_calcio'],['H2CO3','acido_carbonico'],['CuO','oxido_cobre_ii']],choices:[['','Selecciona'],['hidruro_calcio','Hidruro de calcio'],['acido_carbonico','Ácido carbónico'],['oxido_cobre_ii','Óxido de cobre (II)'],['hidroxido','Hidróxido cualquiera']],ex:'Se usan los nombres trabajados en clase y exámenes.'},
+      {id:'q81',type:'mc',q:'81) Si una especie neutra tiene Z = 16, entonces su número de electrones es:',options:{a:'8',b:'16',c:'32',d:'No se puede saber'},answer:'b',ex:'En un átomo neutro, electrones = protones = Z.'},
+      {id:'q82',type:'mc',q:'82) Si una especie tiene 17 protones y carga −1, entonces tiene:',options:{a:'16 electrones',b:'17 electrones',c:'18 electrones',d:'19 electrones'},answer:'c',ex:'Carga −1 implica un electrón adicional respecto al átomo neutro.'},
+      {id:'q83',type:'mc',q:'83) ¿Cuál especie tendrá mayor radio entre Cl−, Cl, Cl3+ y Cl7+?',options:{a:'Cl7+',b:'Cl3+',c:'Cl',d:'Cl−'},answer:'d',ex:'Para el mismo elemento, la especie más negativa es la de mayor radio.'},
+      {id:'q84',type:'mc',q:'84) ¿Cuál de estos bloques corresponde a los metales de transición?',options:{a:'s',b:'p',c:'d',d:'f solamente'},answer:'c',ex:'En el curso se asocian metales de transición con el bloque d.'},
+      {id:'q85',type:'mc',q:'85) Un elemento con configuración de valencia ns2np5 tiende a:',options:{a:'Perder 5 electrones',b:'Ganar 1 electrón',c:'Perder 2 electrones',d:'No reaccionar'},answer:'b',ex:'Le falta un electrón para completar octeto.'},
+      {id:'q86',type:'mc',q:'86) Un elemento con configuración ns1 tiende a formar:',options:{a:'Anión 1−',b:'Catión 1+',c:'Catión 2+',d:'Anión 2−'},answer:'b',ex:'Grupo 1A pierde un electrón con facilidad.'},
+      {id:'q87',type:'mc',q:'87) El nombre correcto de BaBr2 es:',options:{a:'Bromuro de bario',b:'Dibromuro de bario',c:'Bromato de bario',d:'Bromuro bárico (I)'},answer:'a',ex:'Ba es de valencia fija +2; se nombra como bromuro de bario.'},
+      {id:'q88',type:'mc',q:'88) ¿Cuál de estas especies es una sal compuesta?',options:{a:'K2S',b:'NaCl',c:'CsIO2',d:'MgO'},answer:'c',ex:'Contiene ion compuesto (IO2−).' },
+      {id:'q89',type:'mc',q:'89) El nombre correcto de NH4+ es:',options:{a:'Amonio',b:'Amoníaco',c:'Nitruro de hidrógeno',d:'Azanio neutro'},answer:'a',ex:'NH4+ es el ion amonio.'},
+      {id:'q90',type:'mc',q:'90) Si el profesor pide justificar un número de oxidación, lo central es relacionarlo con:',options:{a:'El color del compuesto',b:'La estructura electrónica de valencia',c:'La masa molar',d:'La densidad'},answer:'b',ex:'Ese patrón aparece de forma explícita en exámenes.'},
+      {id:'q91',type:'fill1',q:'91) Complete: El número cuántico principal se simboliza como _____.',answers:['n'],ex:'n representa el nivel principal de energía.'},
+      {id:'q92',type:'fill1',q:'92) Complete: El subnivel l = 3 corresponde a _____.',answers:['f'],ex:'La correspondencia es s, p, d, f.'},
+      {id:'q93',type:'fill1',q:'93) Complete: El grupo 2A se conoce como metales _____.',answers:['alcalinoterreos','alcalinotérreos'],ex:'Grupo 2A = alcalinotérreos.'},
+      {id:'q94',type:'fill1',q:'94) Complete: SO4^2− se llama ion _____.',answers:['sulfato'],ex:'El nombre correcto es sulfato.'},
+      {id:'q95',type:'fill1',q:'95) Complete: BrO3− se llama ion _____.',answers:['bromato'],ex:'BrO3− corresponde a bromato.'},
+      {id:'q96',type:'fill1',q:'96) Complete: CuO es un _____ metálico.',answers:['oxido','óxido'],ex:'CuO es un óxido metálico.'},
+      {id:'q97',type:'match3',q:'97) Asociación: relaciona concepto con descripción.',pairs:[['Cambio físico','no_cambia_composicion'],['Cambio químico','cambia_composicion'],['Mezcla homogénea','uniforme']],choices:[['','Selecciona'],['no_cambia_composicion','No cambia la composición'],['cambia_composicion','Sí cambia la composición'],['uniforme','Composición uniforme'],['heterogenea','No uniforme']],ex:'Son definiciones muy usadas en escogencia.'},
+      {id:'q98',type:'match3',q:'98) Asociación: relaciona número cuántico con lo que describe.',pairs:[['n','nivel'],['l','subnivel'],['m_l','orientacion']],choices:[['','Selecciona'],['nivel','Nivel principal'],['subnivel','Subnivel/forma'],['orientacion','Orientación del orbital'],['spin','Giro del electrón']],ex:'n, l y m_l tienen funciones distintas que se confunden mucho.'},
+      {id:'q99',type:'match3',q:'99) Asociación: relaciona especie con propiedad correcta.',pairs:[['Catión','menos_electrones'],['Anión','mas_electrones'],['Átomo neutro','e_igual_p']],choices:[['','Selecciona'],['menos_electrones','Tiene menos electrones que protones'],['mas_electrones','Tiene más electrones que protones'],['e_igual_p','Electrones = protones'],['mas_protones','Tiene más protones por ionizarse']],ex:'La carga se entiende a partir de la relación entre protones y electrones.'},
+      {id:'q100',type:'match3',q:'100) Asociación: relaciona fórmula con clasificación.',pairs:[['Cl−','ion_simple'],['H2PO4−','ion_compuesto'],['CrCl3','sal_simple']],choices:[['','Selecciona'],['ion_simple','Ion simple'],['ion_compuesto','Ion compuesto'],['sal_simple','Sal simple'],['elemento','Elemento']],ex:'Es un cierre tipo examen con clasificación de especies.'}
+    ];
+
+    function normalize(s){
+      return (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ').trim();
+    }
+
+    function renderQuiz(){
+      const container = document.getElementById('quizContainer');
+      container.innerHTML = quizData.map(item => {
+        if(item.type === 'mc'){
+          const opts = Object.entries(item.options).map(([k,v]) => `<label class="option"><input type="radio" name="${item.id}" value="${k}"> ${v}</label>`).join('');
+          return `<div class="question" data-type="mc" data-id="${item.id}"><h4>${item.q}</h4><div class="options">${opts}</div><div class="feedback"></div></div>`;
+        }
+        if(item.type === 'fill1'){
+          return `<div class="question" data-type="fill1" data-id="${item.id}"><h4>${item.q}</h4><div class="fill-grid"><div class="fill-row"><input type="text" data-fill="${item.id}" placeholder="Escribe tu respuesta"></div></div><div class="feedback"></div></div>`;
+        }
+        if(item.type === 'fill2'){
+          return `<div class="question" data-type="fill2" data-id="${item.id}"><h4>${item.q}</h4><div class="fill-grid"><div class="fill-row"><input type="text" data-fill="${item.id}_1" placeholder="Primer espacio"></div><div class="fill-row"><input type="text" data-fill="${item.id}_2" placeholder="Segundo espacio"></div></div><div class="feedback"></div></div>`;
+        }
+        if(item.type === 'match3'){
+          const rows = item.pairs.map((pair,idx) => `<div class="match-row"><label>${pair[0]}</label><select data-match="${item.id}_${idx}">${item.choices.map(([v,t]) => `<option value="${v}">${t}</option>`).join('')}</select></div>`).join('');
+          return `<div class="question" data-type="match3" data-id="${item.id}"><h4>${item.q}</h4><div class="match-grid">${rows}</div><div class="feedback"></div></div>`;
+        }
+        return '';
+      }).join('');
+      document.getElementById('maxScore').textContent = quizData.length;
+    }
+
+    function gradeQuiz(){
+      let score = 0;
+      quizData.forEach(item => {
+        const box = document.querySelector(`.question[data-id="${item.id}"]`);
+        const fb = box.querySelector('.feedback');
+        let ok = false;
+        if(item.type === 'mc'){
+          const selected = box.querySelector('input[type="radio"]:checked');
+          ok = !!selected && selected.value === item.answer;
+          fb.innerHTML = ok ? `<span class="ok">Correcto.</span> ${item.ex}` : `<span class="bad">Incorrecto.</span> Respuesta correcta: ${String(item.answer).toUpperCase()}. ${item.ex}`;
+        }
+        if(item.type === 'fill1'){
+          const value = normalize(box.querySelector('input').value);
+          ok = item.answers.map(normalize).includes(value);
+          fb.innerHTML = ok ? `<span class="ok">Correcto.</span> ${item.ex}` : `<span class="bad">Incorrecto.</span> Respuesta esperada: ${item.answers[0]}. ${item.ex}`;
+        }
+        if(item.type === 'fill2'){
+          const value1 = normalize(box.querySelector(`[data-fill="${item.id}_1"]`).value);
+          const value2 = normalize(box.querySelector(`[data-fill="${item.id}_2"]`).value);
+          const ok1 = item.answers[0].map(normalize).includes(value1);
+          const ok2 = item.answers[1].map(normalize).includes(value2);
+          ok = ok1 && ok2;
+          fb.innerHTML = ok ? `<span class="ok">Correcto.</span> ${item.ex}` : `<span class="bad">Incorrecto.</span> Respuesta esperada: ${item.answers[0][0]} / ${item.answers[1][0]}. ${item.ex}`;
+        }
+        if(item.type === 'match3'){
+          ok = item.pairs.every((pair,idx) => box.querySelector(`[data-match="${item.id}_${idx}"]`).value === pair[1]);
+          fb.innerHTML = ok ? `<span class="ok">Correcto.</span> ${item.ex}` : `<span class="bad">Incorrecto.</span> ${item.ex}`;
+        }
+        if(ok) score++;
+      });
+      document.getElementById('score').textContent = score;
+      document.getElementById('maxScore').textContent = quizData.length;
+      document.getElementById('statusText').textContent = score === quizData.length ? 'Excelente' : score >= 85 ? 'Muy bien' : score >= 70 ? 'Buen nivel, pero repasa' : score >= 50 ? 'Aceptable, pero necesita más práctica' : 'Necesita repaso fuerte';
+    }
+
+    function resetQuiz(){
+      document.querySelectorAll('#quizContainer input[type="radio"]').forEach(i=>i.checked=false);
+      document.querySelectorAll('#quizContainer input[type="text"]').forEach(i=>i.value='');
+      document.querySelectorAll('#quizContainer select').forEach(s=>s.value='');
+      document.querySelectorAll('#quizContainer .feedback').forEach(f=>f.innerHTML='');
+      document.getElementById('score').textContent = '0';
+      document.getElementById('maxScore').textContent = quizData.length;
+      document.getElementById('statusText').textContent = 'Sin revisar';
+    }
+
+    renderQuiz();
+    document.getElementById('checkQuiz').addEventListener('click', gradeQuiz);
+    document.getElementById('resetQuiz').addEventListener('click', resetQuiz);
+  </script>
+</body>
+</html>
